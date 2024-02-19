@@ -11,7 +11,10 @@ type Attr struct {
 }
 
 func (o Attr) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
-	ca := c.(specification.Attr)
+	ca, ok := c.(specification.Attr)
+	if !ok {
+		return nil, false
+	}
 
 	field, ok := reflect.TypeOf(sub).Elem().FieldByName(ca.Name)
 	if !ok {

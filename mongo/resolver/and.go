@@ -9,8 +9,13 @@ type And struct {
 }
 
 func (o And) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
+	an, ok := c.(specification.And)
+	if !ok {
+		return nil, false
+	}
+
 	var ops []mongo.Criteria
-	for _, operand := range c.(specification.And).Operands {
+	for _, operand := range an.Operands {
 		mc, err := conv.Convert(operand, sub)
 		if err != nil {
 			return nil, false

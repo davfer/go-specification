@@ -5,13 +5,17 @@ import (
 	"github.com/davfer/go-specification/mongo"
 )
 
-func NewMongoResolver() specification.Converter[mongo.Criteria] {
+func NewMongoConverter(extraResolvers ...specification.Resolver[mongo.Criteria]) specification.Converter[mongo.Criteria] {
+	resolvers := []specification.Resolver[mongo.Criteria]{
+		Or{},
+		And{},
+		Attr{},
+		Not{},
+		Primitive{},
+	}
+	resolvers = append(resolvers, extraResolvers...)
+
 	return specification.Converter[mongo.Criteria]{
-		Resolvers: []specification.Resolver[mongo.Criteria]{
-			Or{},
-			And{},
-			Attr{},
-			Not{},
-		},
+		Resolvers: resolvers,
 	}
 }

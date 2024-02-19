@@ -9,7 +9,12 @@ type Not struct {
 }
 
 func (n Not) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
-	mc, err := conv.Convert(c.(specification.Not).Operand, sub)
+	no, ok := c.(specification.Not)
+	if !ok {
+		return nil, false
+	}
+
+	mc, err := conv.Convert(no.Operand, sub)
 	if err != nil {
 		return nil, false
 	}

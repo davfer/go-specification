@@ -9,7 +9,12 @@ type Primitive struct {
 }
 
 func (o Primitive) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
-	res, err := conv.Convert(c.(specification.CriteriaPrimitive).GetPrimitive(), sub)
+	pr, ok := c.(specification.CriteriaPrimitive)
+	if !ok {
+		return nil, false
+	}
+
+	res, err := conv.Convert(pr.GetPrimitive(), sub)
 	if err != nil {
 		return nil, false
 	}
