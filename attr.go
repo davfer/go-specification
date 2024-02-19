@@ -2,6 +2,8 @@ package specification
 
 import "reflect"
 
+type Comparator string
+
 const (
 	ComparisonEq  Comparator = "eq"
 	ComparisonNe  Comparator = "ne"

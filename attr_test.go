@@ -24,7 +24,26 @@ func TestAttr_IsSatisfiedBy(t *testing.T) {
 		fields fields
 		value  any
 		want   bool
+		panic  bool
 	}{
+		{
+			name: "Test unexported field",
+			fields: fields{
+				Name:       "id",
+				Value:      "123",
+				Comparison: ComparisonEq,
+			},
+			panic: true,
+		},
+		{
+			name: "Test empty field",
+			fields: fields{
+				Name:       "",
+				Value:      "123",
+				Comparison: ComparisonEq,
+			},
+			panic: true,
+		},
 		{
 			name: "Test eq true",
 			fields: fields{
@@ -225,6 +244,13 @@ func TestAttr_IsSatisfiedBy(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			if tt.panic {
+				defer func() {
+					if r := recover(); r == nil {
+						t.Errorf("The code did not panic")
+					}
+				}()
+			}
 			a := Attr{
 				Name:       tt.fields.Name,
 				Value:      tt.fields.Value,
