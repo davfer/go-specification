@@ -2,19 +2,19 @@ package resolver
 
 import (
 	"github.com/davfer/go-specification"
-	"github.com/davfer/go-specification/mongo"
+	"github.com/davfer/go-specification/sql"
 )
 
 type And struct {
 }
 
-func (o And) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
+func (o And) Resolve(conv specification.Converter[sql.Criteria], c specification.Criteria, sub any) (sql.Criteria, bool) {
 	an, ok := c.(specification.And)
 	if !ok {
 		return nil, false
 	}
 
-	var ops []mongo.Criteria
+	var ops []sql.Criteria
 	for _, operand := range an.Operands {
 		mc, err := conv.Convert(operand, sub)
 		if err != nil {
@@ -22,5 +22,5 @@ func (o And) Resolve(conv specification.Converter[mongo.Criteria], c specificati
 		}
 		ops = append(ops, mc)
 	}
-	return mongo.And{Operands: ops}, true
+	return sql.And{Operands: ops}, true
 }

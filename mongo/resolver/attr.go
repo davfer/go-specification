@@ -1,4 +1,4 @@
-package mongo
+package resolver
 
 import (
 	"github.com/davfer/go-specification"
@@ -10,7 +10,7 @@ import (
 type Attr struct {
 }
 
-func (o Attr) Resolve(conv specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
+func (o Attr) Resolve(_ specification.Converter[mongo.Criteria], c specification.Criteria, sub any) (mongo.Criteria, bool) {
 	ca, ok := c.(specification.Attr)
 	if !ok {
 		return nil, false

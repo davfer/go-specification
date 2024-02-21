@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/davfer/go-specification"
 	"github.com/davfer/go-specification/mongo/repository"
-	mongoSpec "github.com/davfer/go-specification/mongo/resolver"
+	"github.com/davfer/go-specification/mongo/resolver"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -61,7 +61,7 @@ func main() {
 
 	repo := repository.CriteriaRepository[*User]{
 		Collection: db,
-		Converter:  mongoSpec.NewMongoConverter(),
+		Converter:  resolver.NewMongoConverter(),
 	}
 	res, err := repo.Match(context.Background(), adultUsersCriteria)
 	if err != nil {

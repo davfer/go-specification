@@ -1,4 +1,4 @@
-package mongo
+package resolver
 
 import (
 	"github.com/davfer/go-specification"
