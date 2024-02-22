@@ -7,9 +7,9 @@ import (
 
 func NewSqlConverter(extraResolvers ...specification.Resolver[sql.Criteria]) specification.Converter[sql.Criteria] {
 	resolvers := []specification.Resolver[sql.Criteria]{
-		And{},
 		Attr{},
-		//Or{},
+		And{},
+		Or{},
 	}
 	resolvers = append(resolvers, extraResolvers...)
 

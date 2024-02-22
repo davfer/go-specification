@@ -5,6 +5,11 @@ go 1.20
 require go.mongodb.org/mongo-driver v1.14.0
 
 require (
+	github.com/davfer/archit v0.0.2
+	golang.org/x/exp v0.0.0-20240213143201-ec583247a57a // indirect
+)
+
+require (
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
