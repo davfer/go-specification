@@ -1,9 +1,11 @@
 package specification
 
-import "errors"
+import (
+	"fmt"
+)
 
 // ErrNoResolverFound is the error returned when no resolver is found for a given criteria
-var ErrNoResolverFound = errors.New("no resolver found")
+var ErrNoResolverFound = fmt.Errorf("no resolver found")
 
 // CriteriaPrimitive is a helper interface to allow the conversion of a Criteria to a primitive Criteria.
 // Useful to work with custom criteria types.
