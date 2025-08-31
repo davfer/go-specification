@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+
 	"github.com/davfer/go-specification"
 	"github.com/davfer/go-specification/mongo/repository"
 	mongoSpec "github.com/davfer/go-specification/mongo/resolver"
@@ -70,5 +71,7 @@ func main() {
 
 	fmt.Printf("Adult users: %v\n", res[0].Username) // Adult users: user1
 
-	db.DeleteMany(context.Background(), bson.M{})
+	if _, err = db.DeleteMany(context.Background(), bson.M{}); err != nil {
+		panic(err)
+	}
 }

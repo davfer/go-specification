@@ -3,11 +3,9 @@ package specification
 import "testing"
 
 type testAndEntity struct {
-	id            string
-	Attr1         string
-	someOtherAttr bool
-	IntNice       int
-	Floating      float64
+	Attr1    string
+	IntNice  int
+	Floating float64
 }
 
 func TestAnd_IsSatisfiedBy(t *testing.T) {

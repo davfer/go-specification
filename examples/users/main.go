@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/davfer/go-specification"
-	_ "github.com/davfer/go-specification"
 )
 
 type User struct {

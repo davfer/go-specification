@@ -47,9 +47,10 @@ func (a Attr) IsSatisfiedBy(obj any) bool {
 		return false
 	}
 
-	if a.Comparison == ComparisonEq {
+	switch a.Comparison {
+	case ComparisonEq:
 		return value == a.Value
-	} else if a.Comparison == ComparisonNe {
+	case ComparisonNe:
 		return value != a.Value
 	}
 

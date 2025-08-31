@@ -3,20 +3,12 @@ package specification
 import "testing"
 
 type testNotEntity struct {
-	id            string
-	Attr1         string
-	someOtherAttr bool
-	IntNice       int
-	Floating      float64
+	Attr1    string
+	IntNice  int
+	Floating float64
 }
 
 func TestNot_IsSatisfiedBy(t *testing.T) {
-	type fields struct {
-		Operand Criteria
-	}
-	type args struct {
-		value any
-	}
 	tests := []struct {
 		name    string
 		operand Criteria
@@ -50,6 +42,7 @@ func TestNot_IsSatisfiedBy(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			n := Not{
 				Operand: tt.operand,
 			}
