@@ -4,9 +4,10 @@ import (
 	"context"
 	"fmt"
 
+	"go.mongodb.org/mongo-driver/v2/mongo"
+
 	"github.com/davfer/go-specification"
-	mongoSpecification "github.com/davfer/go-specification/mongo"
-	"go.mongodb.org/mongo-driver/mongo"
+	mongoSpecification "github.com/davfer/go-specification/mongo/v2"
 )
 
 var ErrNoMatch = fmt.Errorf("no match found")

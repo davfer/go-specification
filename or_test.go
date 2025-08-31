@@ -3,11 +3,9 @@ package specification
 import "testing"
 
 type testOrEntity struct {
-	id            string
-	Attr1         string
-	someOtherAttr bool
-	IntNice       int
-	Floating      float64
+	Attr1    string
+	IntNice  int
+	Floating float64
 }
 
 func TestOr_IsSatisfiedBy(t *testing.T) {
@@ -114,6 +112,7 @@ func TestOr_IsSatisfiedBy(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			o := Or{
 				Operands: tt.operands,
 			}

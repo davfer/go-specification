@@ -6,11 +6,9 @@ import (
 )
 
 type testAttrEntity struct {
-	id            string
-	Attr1         string
-	someOtherAttr bool
-	IntNice       int
-	Floating      float64
+	Attr1    string
+	IntNice  int
+	Floating float64
 }
 
 func TestAttr_IsSatisfiedBy(t *testing.T) {

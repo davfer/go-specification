@@ -1,6 +1,9 @@
 package specification
 
-import "reflect"
+import (
+	"fmt"
+	"reflect"
+)
 
 type Comparator string
 
@@ -11,6 +14,11 @@ const (
 	ComparisonGte Comparator = "gte"
 	ComparisonLt  Comparator = "lt"
 	ComparisonLte Comparator = "lte"
+	//ComparisonCo  Comparator = "co"
+	//ComparisonSw  Comparator = "sw"
+	//ComparisonEw  Comparator = "ew"
+	//ComparisonIn  Comparator = "in"
+	//ComparisonNin Comparator = "nin"
 )
 
 type Attr struct {
@@ -47,48 +55,58 @@ func (a Attr) IsSatisfiedBy(obj any) bool {
 		return false
 	}
 
-	if a.Comparison == ComparisonEq {
-		return value == a.Value
-	} else if a.Comparison == ComparisonNe {
-		return value != a.Value
-	}
-
 	switch a.Comparison {
+	case ComparisonEq:
+		return value == a.Value
+	case ComparisonNe:
+		return value != a.Value
 	case ComparisonGt:
-		switch value.(type) {
+		switch v := value.(type) {
 		case int:
-			return value.(int) > a.Value.(int)
+			return v > a.Value.(int)
 		case float64:
-			return value.(float64) > a.Value.(float64)
+			return v > a.Value.(float64)
 		case string:
-			return value.(string) > a.Value.(string)
+			if s, ok := a.Value.(fmt.Stringer); ok {
+				return v > s.String()
+			}
+			return v > a.Value.(string)
 		}
 	case ComparisonGte:
-		switch value.(type) {
+		switch v := value.(type) {
 		case int:
-			return value.(int) >= a.Value.(int)
+			return v >= a.Value.(int)
 		case float64:
-			return value.(float64) >= a.Value.(float64)
+			return v >= a.Value.(float64)
 		case string:
-			return value.(string) >= a.Value.(string)
+			if s, ok := a.Value.(fmt.Stringer); ok {
+				return v >= s.String()
+			}
+			return v >= a.Value.(string)
 		}
 	case ComparisonLt:
-		switch value.(type) {
+		switch v := value.(type) {
 		case int:
-			return value.(int) < a.Value.(int)
+			return v < a.Value.(int)
 		case float64:
-			return value.(float64) < a.Value.(float64)
+			return v < a.Value.(float64)
 		case string:
-			return value.(string) < a.Value.(string)
+			if s, ok := a.Value.(fmt.Stringer); ok {
+				return v < s.String()
+			}
+			return v < a.Value.(string)
 		}
 	case ComparisonLte:
-		switch value.(type) {
+		switch v := value.(type) {
 		case int:
-			return value.(int) <= a.Value.(int)
+			return v <= a.Value.(int)
 		case float64:
-			return value.(float64) <= a.Value.(float64)
+			return v <= a.Value.(float64)
 		case string:
-			return value.(string) <= a.Value.(string)
+			if s, ok := a.Value.(fmt.Stringer); ok {
+				return v <= s.String()
+			}
+			return v <= a.Value.(string)
 		}
 	}
 
